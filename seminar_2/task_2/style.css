@@ -1,0 +1,29 @@
+.btnOpen {
+    color: aqua;
+
+
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid black;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+
+ .modal h2 {
+     margin-top: 0;
+ }
+
+ .modal-close {
+     cursor: pointer;
+     float: right;
+ }

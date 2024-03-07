@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task_7</title>
+  <style>
+    .circle {
+      width: 100px;
+      height: 100px;
+      background-color: brown;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transition: all 0.5s ease;
+    }
+  </style>
+</head>
+<body>
+  <!-- Создаем круг -->
+  <div class="circle">
+    <script>
+      // Когда документ загружен
+      document.addEventListener("DOMContentLoaded", () => {
+        // Находим элемент круга
+        const circle = document.querySelector(".circle");
+        // Устанавливаем флаг движения в false (по умолчанию не двигается)
+        let isMoving = false;
+
+        // Когда курсор наводится на круг
+        circle.addEventListener("mouseover", () => {
+          // Если круг не двигается в данный момент
+          if (!isMoving) {
+            // Генерируем случайное положение по вертикали
+            const randomTop = Math.random() * window.innerHeight;
+            // Генерируем случайное положение по горизонтали
+            const randomLeft = Math.random() * window.innerWidth;
+
+            // Устанавливаем новое положение круга
+            circle.style.top = `${randomTop}px`;
+            circle.style.left = `${randomLeft}px`; // Было circle.style.top
+          }
+        });
+
+        // Когда кнопка мыши нажата на круге
+        circle.addEventListener("mousedown", () => {
+          // Устанавливаем флаг движения в true
+          isMoving = true;
+          // Изменяем цвет круга на синий
+          circle.style.backgroundColor = "blue";
+        });
+
+        // Когда кнопка мыши отпущена (после нажатия) на круге
+        circle.addEventListener("mouseup", () => {
+          // Устанавливаем флаг движения в false
+          isMoving = false;
+          // Изменяем цвет круга на зеленый
+          circle.style.backgroundColor = "green";
+        });
+      });
+    </script>
+  </div>
+</body>
+</html>

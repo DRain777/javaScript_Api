@@ -1,0 +1,39 @@
+.header {
+    /* margin-left: 25%;
+    margin-top: 25%; */
+    display: flex;
+    justify-content: center;
+    position: relative;
+    
+    
+
+    width: 100%;
+    height: 30px;
+    background-color: black;
+    /* display: inline; */
+    padding: 10px
+
+}
+
+.header_home{
+    margin: 15px;
+    
+}
+
+.header_aboutUS{
+    margin: 15px;
+   
+
+}
+
+.header_services{
+    margin: 15px;
+    
+
+}
+
+.contacts{
+    margin: 15px;
+   
+    
+}

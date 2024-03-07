@@ -1,0 +1,148 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 300px;
+            padding: 20px;
+            background-color: aqua;
+            text-align: center;
+          }
+
+        .open-modal-btn{
+            padding: 10px 20px;
+            background-color: black;
+            color: #fff;
+            cursor: pointer;
+
+        }
+    </style>
+</head>
+<body>
+
+    <button class="open-modal-btn">Открыть модальное окно</button>
+
+     <div class="modal">
+        <h2>модальное окно</h2>
+        <p>Нажмине вне окна что бы закрыть его</p>
+     </div>
+
+
+      <script>
+        const modal = document.getElementById('modal');
+        const openModalBtn = document.querySelector('.open-modal-btn');
+
+        openModalBtn.addEventListener('click',  (e) => {
+            modal.style.display = 'block';
+        });
+        document.addEventListener('mousedown', function (e) {
+            if(!modal.contains(event.target) && event.target !== openModalBtn) {
+                modal.style.display = 'none'
+            }
+        });
+     </script>
+
+    
+
+    
+</body>
+</html> -->
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 300px;
+            padding: 10px;
+            background-color: aqua;
+            text-align: center;
+        }
+
+        .open-modal-btn{
+            padding: 10px 20px;
+            background-color: black;
+            color: #fff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <button class="open-modal-btn">Открыть модальное окно</button>
+
+    <div class="modal">
+        <h2>модальное окно</h2>
+        <p>Нажмине вне окна что бы закрыть его</p>
+    </div>
+
+    <script>
+        // Получаем ссылку на модальное окно и кнопку для открытия
+        const modal = document.querySelector('.modal');
+        const openModalBtn = document.querySelector('.open-modal-btn');
+
+        // Добавляем слушатель события 'click' на кнопку открытия модального окна
+        openModalBtn.addEventListener('click', (event) => {
+            // При клике на кнопку изменяем свойство display модального окна на 'block', чтобы показать его
+            modal.style.display = 'block';
+            openModalBtn.style.color ='blue';
+            openModalBtn.style.width = "400";
+        });
+
+        // Добавляем слушатель события 'mousedown' на весь документ
+        document.addEventListener('mousedown', function (event) {
+            // Проверяем, что кликнули вне модального окна и не на кнопку открытия
+            if (!modal.contains(event.target) && event.target !== openModalBtn) {
+                // Если условие выполняется, скрываем модальное окно
+                modal.style.display = 'none';
+            }
+        });
+
+
+
+
+
+    </script>
+
+</body>
+</html>
+
+
+<!-- Вот что делает каждая часть кода:
+
+CSS задает стили для модального окна и кнопки открытия.
+HTML содержит кнопку и модальное окно.
+JavaScript:
+Получает ссылки на модальное окно и кнопку открытия.
+Добавляет слушатель события 'click' на кнопку открытия модального окна. При клике модальное окно становится видимым.
+Добавляет слушатель события 'mousedown' на документ. Если клик происходит вне модального окна и не на кнопке откр -->
+
+
+    <!-- openModalBtn.addEventListener('click', (event) => {
+//     modal.style.display = 'block';
+//     openModalBtn.style.color ='blue';
+//     modal.style.backgroundColor = 'red'; // Исправленное свойство
+// }); -->

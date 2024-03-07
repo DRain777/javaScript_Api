@@ -1,0 +1,67 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="btn">Нажми меня</button>
+    <script>
+      const button = document.querySelector(".btn");
+      button.addEventListener("click", function (event) {
+        if (event.isTrusted) {
+          console.log("Клик события является доверенным");
+        } else {
+          console.log("Клик события Не является доверенным");
+        }
+      });
+
+      function simulateClick() {
+        const clickEvent = new Event("click", { bubbles: true });
+        button.dispatchEvent(clickEvent);
+      }
+
+      setTimeout(simulateClick, 2000); // имитация клика 2 секунды
+    </script>
+  </body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">Нажми меня</button>
+    <script>
+        // Получаем ссылку на кнопку по ее id
+        const button = document.querySelector("#btn");
+
+        // Добавляем обработчик события "click" к кнопке
+        button.addEventListener("click", function (event) {
+            // Проверяем, является ли событие доверенным
+            if (event.isTrusted) {
+                console.log("Клик события является доверенным");
+            } else {
+                console.log("Клик события Не является доверенным");
+            }
+        });
+
+        // Функция для имитации клика
+        function simulateClick() {
+            // Создаем новое событие "click" с параметром bubbles: true, чтобы оно всплывало
+            const clickEvent = new Event("click", { bubbles: true });
+            // Диспатчим (запускаем) событие на кнопке
+            button.dispatchEvent(clickEvent);
+        }
+
+        // Запускаем имитацию клика через 2 секунды
+        setTimeout(simulateClick, 2000);
+        setTimeout(simulateClick, 3000);
+    </script>
+</body>
+</html>

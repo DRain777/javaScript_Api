@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation Menu</title>
+    <style>
+        /* Стили для активного пункта меню */
+        .active {
+            background-color: #f0f0f0;
+        }
+        /* Стили для эффекта наведения */
+        ul li:hover {
+            background-color: #ccc;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+
+    <script>
+        document.querySelector('ul').addEventListener('click',  (e) => {
+            e.preventDefault();
+            const activeEl = document.querySelector('.active');
+            if(activeEl) {
+                activeEl.classList.remove("active");
+            }
+            if(e.target.tagName === "A") {
+                e.target.parentElement.classList.add("active");
+            }
+        });
+    </script>
+</body>
+</html>

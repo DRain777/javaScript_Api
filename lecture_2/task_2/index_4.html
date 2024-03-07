@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <button class="btn"> Click</button>
+    <div class="title"></div>
+    <script>
+        // Создаем события клика 
+        const clickEvent = new Event('click');
+        // добовляем обработчик событий 
+        const title = document.querySelector('.title');
+        const button = document.querySelector('.btn');
+        button.addEventListener('click', function (e) {
+              title.textContent = "Нажали на кнопку";
+            
+        });
+
+        // имитируем клик по кнопке
+        button.dispatchEvent(clickEvent);
+    </script>
+    
+</body>
+</html>

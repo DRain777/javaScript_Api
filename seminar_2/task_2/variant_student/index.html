@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>variant_student</title>
+  <style>
+    .modelWindows {
+      width: 100px;
+      height: 100px;
+      border: 1px solid black;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      display: none;
+    }
+
+    .is-open {
+      opacity: 1;
+      /* Вы можете задать другие стили для открытого модального окна здесь */
+      display: block; /* изменено с none на block */
+    }
+  </style>
+</head>
+<body>
+  <button class="btn">открыть модальное окно</button>
+
+  <div class="modelWindows">Модальное окно</div>
+
+  <script>
+    // Необходимо исправить обращение к классу .btn
+    const btn = document.querySelector(".btn");
+    // Необходимо исправить обращение к классу .modelWindows
+    const modalWin = document.querySelector(".modelWindows");
+
+    btn.addEventListener("click", (e) => {
+      // Необходимо исправить обращение к классу .modelWindows
+      modalWin.classList.add("is-open");
+    });
+
+    modalWin.addEventListener("click", (e) => {
+      // Необходимо исправить обращение к классу .modelWindows
+      modalWin.classList.remove("is-open");
+    });
+  </script>
+</body>
+</html>

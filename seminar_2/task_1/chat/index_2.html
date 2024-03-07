@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation Menu</title>
+    <style>
+        /* Стили для активного пункта меню */
+        .active {
+            background-color: #10ef0d;
+        }
+        /* Стили для эффекта наведения */
+        ul li:hover {
+            background-color: #de0c0c;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li><a href="#">Главная</a></li>
+        <li><a href="#">О нас</a></li>
+        <li><a href="#">Услуги</a></li>
+        <li><a href="#">Контакты</a></li>
+    </ul>
+
+    <script>
+        // Добавляем обработчик события "click" для элемента <ul>
+        document.querySelector('ul').addEventListener('click', (e) => {
+            // Отменяем стандартное действие по умолчанию для ссылок (переход по ссылке)
+            e.preventDefault();
+
+            // Получаем текущий активный элемент
+            const activeEl = document.querySelector('.active');
+
+            // Если активный элемент существует, удаляем у него класс "active"
+            if (activeEl) {
+                activeEl.classList.remove("active");
+            }
+
+            // Если целевой элемент является ссылкой (<a>), добавляем ему класс "active"
+            if (e.target.tagName === "A") {
+                e.target.classList.add("active");
+            }
+        });
+    </script>
+</body>
+</html>

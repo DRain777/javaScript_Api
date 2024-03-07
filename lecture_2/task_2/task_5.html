@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Определяем стили для элементов меню */
+        .menu-item {
+            padding: 10px;
+            cursor: pointer;
+        }
+        /* При наведении на элемент меню меняем его фоновый цвет */
+        /* .menu-item:hover {
+            background-color: #f0f0f0;
+        } */
+    </style>
+</head>
+<body>
+    <!-- Создаем меню -->
+    <div class="menu">
+        <!-- Элементы меню -->
+        <div class="menu-item">Пункт 1</div>
+        <div class="menu-item">Пункт 2</div>
+        <div class="menu-item">Пункт 3</div>
+    </div>
+
+    <script>
+        // Получаем все элементы меню
+        const menuItems = document.querySelectorAll('.menu-item');
+        // Для каждого элемента меню добавляем обработчики событий
+        menuItems.forEach(item => {
+            // При наведении мыши на элемент меню
+            item.addEventListener('mouseenter', function (e) {
+                // Изменяем его фоновый цвет
+                item.style.backgroundColor = '#f0f0f0';
+            });
+
+            // При уходе мыши с элемента меню
+            item.addEventListener('mouseleave', function (e) {
+                // Возвращаем исходный фоновый цвет элемента
+                item.style.backgroundColor = '';
+            });
+
+            // При клике на элемент меню
+            item.addEventListener('click', function (e) {
+                // Выводим текстовое содержимое элемента в консоль
+                console.log(item.textContent);
+            });
+        });
+    </script>
+</body>
+</html>

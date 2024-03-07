@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        .list
+                  { 
+                    margin: 15px;
+
+                  }
+    </style>
+
+
+
+    <ul id="list">
+        <li>Элемент 1</li>
+        <li>Элемент 2</li>
+        <li>Элемент 3</li>
+        <li>Элемент 4</li>
+        <li>Элемент 5</li>
+    </ul>
+
+    <script>
+        const list = document.getElementById('list');
+        list.addEventListener('click', function (e) {
+            if(e.target.tagName ==='li') {
+                console.log('li');
+                console.log('Вы нажали ');
+
+            }
+        });
+    </script>
+
+    
+</body>
+</html>

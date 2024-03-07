@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lazy Load Images</title>
+  <style>
+    #imageContainer {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .imageItem {
+      width: 200px;
+      height: 200px;
+      margin: 10px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div id="imageContainer"></div>
+
+  <script>
+    // Массив изображений (замените на ваши изображения)
+    const images = [
+      'image1.jpg',
+      'image2.jpg',
+      'image3.jpg',
+      // Добавьте другие изображения...
+    ];
+
+    // Функция для загрузки изображений
+    function loadImages() {
+      const container = document.getElementById('imageContainer');
+
+      images.forEach(image => {
+        const imgElement = document.createElement('img');
+        imgElement.src = image;
+        imgElement.classList.add('imageItem');
+        container.appendChild(imgElement);
+      });
+    }
+
+    // Загрузка изображений при загрузке страницы
+    document.addEventListener('DOMContentLoaded', loadImages);
+
+    // Обработчик прокрутки страницы
+    window.addEventListener('scroll', () => {
+      const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
+      // Проверяем, долистал ли пользователь до конца страницы
+      if (scrollTop + clientHeight >= scrollHeight - 100) {
+        // Подгружаем еще изображений (можете изменить порог прокрутки)
+        loadImages();
+      }
+    });
+  </script>
+</body>
+</html>
