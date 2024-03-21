@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>avtofocust</title>
+  </head>
+  <body>
+    <style>
+      .invalid {
+        border-color: red;
+      }
+
+      #error {
+        color: red;
+      }
+    </style>
+    <form name="superForm">
+      Ваш email: <input type="email" name="input" />
+
+      <div id="error"></div>
+    </form>
+
+    <script>
+      const input = document.forms.superForm.input;
+      const error = document.querySelector("#error");
+      input.onblur = function () {
+        if (!input.value.includes("@")) {
+          // не email ,,, if!input если не
+          // includes содержит  символ собака
+          input.classList.add("invalid");
+          error.innerHTML = "Пожалуста , введите правельный email."; //
+          //error.textContent  разные варианты
+        }
+      };
+
+
+
+
+
+    //    input.addEventListener("blur", () => {
+    //       if (!input.value.includes("@")) {
+    //       }
+    //     });
+
+      input.onfocus = function () {
+        if (this.classList.contains("invalid")) {
+          this.clasList.remove("invalid");
+          error.textContent = "";
+        }
+      };
+    </script>
+  </body>
+</html>

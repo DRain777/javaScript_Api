@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task_3</title>
+  </head>
+  <body>
+    <!-- Вы разрабатываете веб приложение для выбора и отображения данных о странах
+    У вас есть форма ,включающая элемент select? в котором пользователь может выбрать определенную страну . При выборе страны , вам необходимо динамически обновлять другой 
+     элемент на странице , например отображать тнформацию о столице выбрранной страны. -->
+
+    <h1>Выбирите страну</h1>
+    <form id="country-form">
+      <select id="country-select">
+        <option value="">выберите страну</option>
+        <option value="RUSSIA">Россия</option>
+        <option value="usa">Сша</option>
+        <option value="china">Китай</option>
+      </select>
+    </form>
+
+    <h2>Столица:</h2>
+    <p id="capital-info">выберите страну ,что бы узнать сталицу</p>
+
+    <script>
+      const selectElement = document.querySelector("#country-select");
+      const capitalInfoElement = document.querySelector("#capital-info");
+
+    //   document.addEventListener("change", (e) => {
+    //     // body
+    //   });
+      //тоже самое
+      selectElement.onchange = function () {
+        const selectedCountry = selectElement.value;
+        let capital = "";
+        // определяем сталицу в зависимости от выбранной страны
+        switch (selectedCountry) {
+          case "RUSSIA":
+            capital = "Москва";
+            break;
+          case "usa":
+            capital = "Вашинктон,D.C";
+            break;
+          case "china":
+            capital = "Пекин";
+            break;
+
+          default:
+            capital = "выбирите страну что бы узнать сталицу.";
+            break;
+        }
+
+        // обновлем информацию о сталице на странице 
+        capitalInfoElement.textContent = capital
+      };
+    </script>
+  </body>
+</html>
