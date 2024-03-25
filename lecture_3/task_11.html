@@ -9,7 +9,7 @@
     <form name="superForm">
         title: <input name="title" value="test product">
         <br />
-        price: <input name="price" value="100"> <!-- Changed value to an actual number -->
+        price: <input name="price" value="13.5"> <!-- Changed value to an actual number -->
         <br />
         description: <input name="description" value="Sun Light"> <!-- Corrected typo in "description" -->
         <br />
@@ -25,10 +25,15 @@
         const form = document.forms.superForm;
         form.onsubmit = async (e) => {
             e.preventDefault();
+
+
             let response = await fetch('https://fakestoreapi.com/products',{
                 method:"POST",
                 body:new FormData(form)
             });
+
+            let result = await response.json();
+            console.log(result);
         }
 
         // Асинхронная функция, которая загружает данные из API Github
