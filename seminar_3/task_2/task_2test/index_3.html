@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Fetch Example</title>
+    <style>
+        img {
+            height: 100px;
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Данные из API</h1>
+    <ul id="data-list"></ul>
+
+    <script>
+        const ACCESS_KEY = "dOZhSJ0HqEwGuGZAQSuFpuE8lo9aHb1Sh-N6SOiQUdc"; // Ваш API ключ
+        const API_URL = `https://api.unsplash.com/photos/?client_id=${ACCESS_KEY}`;
+        const dataList = document.getElementById("data-list");
+
+        function renderData(data) {
+            dataList.innerHTML = "";
+            data.forEach(item => {
+                const listItem = document.createElement("li");
+                const img = document.createElement("img");
+                img.src = item.urls.small;
+                img.alt = item.alt_description;
+                listItem.appendChild(img);
+                const authorInfo = document.createElement("p");
+                authorInfo.textContent = `Автор: ${item.user.name}`;
+                listItem.appendChild(authorInfo);
+                dataList.appendChild(listItem);
+            });
+        }
+
+        function fetchData() {
+            fetch(API_URL)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Ошибка при получении данных: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    renderData(data);
+                })
+                .catch(error => {
+                    dataList.innerHTML = `<li>${error.message}</li>`;
+                });
+        }
+
+        function handleScroll() {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+                fetchData(); // Вызываем загрузку новых данных при достижении конца страницы
+            }
+        }
+
+        window.addEventListener("scroll", handleScroll); // Добавляем обработчик события прокрутки
+        fetchData(); // Вызываем функцию для загрузки данных при загрузке страницы
+    </script>
+</body>
+</html>

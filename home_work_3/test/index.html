@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <style>
+        .image-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .image-container img {
+            width: 150px;
+            height: 100px;
+        }
+        .photographer {
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        .liked {
+            outline: 2px solid rgb(0, 208, 255);
+        }
+    </style>
+</head>
+<body>
+    <h1>Image Gallery</h1>
+    <div class="image-container" id="image-container"></div>
+
+    <script>
+        const ACCESS_KEY = "dOZhSJ0HqEwGuGZAQSuFpuE8lo9aHb1Sh-N6SOiQUdc"; // Ваш API ключ
+        const API_URL = `https://api.unsplash.com/photos/?client_id=${ACCESS_KEY}`;
+        const imageContainer = document.getElementById("image-container");
+
+        // Функция для добавления изображений на страницу
+        function addPictures() {
+            fetch(API_URL)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Ошибка при получении данных: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    data.forEach(pic => {
+                        const imgEl = document.createElement('img');
+                        imgEl.src = pic.urls.regular;
+                        imgEl.alt = pic.alt_description;
+                        imgEl.dataset.photographer = pic.user.name; // Сохраняем имя фотографа в dataset
+                        imgEl.classList.add('image');
+                        imageContainer.appendChild(imgEl);
+
+                        // Создаем кнопку "лайк" для каждого изображения
+                        const likeButton = document.createElement('button');
+                        likeButton.textContent = 'Лайк';
+                        imgEl.insertAdjacentElement('afterend', likeButton);
+
+                        // Добавляем обработчик события клика на кнопку "лайк"
+                        likeButton.addEventListener('click', () => {
+                            imgEl.classList.toggle('liked'); // Переключаем класс "liked"
+                        });
+                    });
+                })
+                .catch(error => console.log(error));
+        }
+
+        // Вызываем функцию добавления изображений при загрузке страницы
+        addPictures();
+    </script>
+</body>
+</html>

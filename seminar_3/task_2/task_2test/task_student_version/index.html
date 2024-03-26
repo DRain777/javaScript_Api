@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Данные из API</h1>
+    <ul id="data-list"></ul>
+
+    <script>
+      const ACCESS_KEY = "dOZhSJ0HqEwGuGZAQSuFpuE8lo9aHb1Sh-N6SOiQUdc"; //  API ключ
+      const API_URL = `https://api.unsplash.com/photos/?client_id=${ACCESS_KEY}`;
+      const dataList = document.getElementById("data-list");
+
+
+
+      function addPictures(container) {
+        fetch( 'https://api.unsplash.com/photos/',{
+            method:'GET',
+            headers:{
+                'Authorization': `Client-ID ${ACCESS_KEY} `,
+            }
+        })
+        .then(respons => respons.json())
+        .then((data) => {
+            data.forEch((pic) => {
+                const imgEl = document.createElement('img');
+                imgEl.src =pic.urls.regular;
+                imgEl.classList.add('data-list');
+                container.appendChild(imgEl);
+            })
+        })
+        .catch(e => console.log(e));
+
+        const imageContainerEl = document.querySelector('.img-container');
+        addPictures(imageContainerEl);
+
+
+        // бесконечная прокрутка 
+        window.addEventListener('scroll', () => {
+            if(window.innerHeight + window.scroll >= document.body.offsetHeight) {
+                addPictures(imageContainerEl);
+                console.log("addPICTURES");
+            }
+
+        }) 
+
+
+      };
+
+
+
+
+
+
+    </script>
+  </body>
+</html>

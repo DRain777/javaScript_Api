@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+    <style>
+        img {
+            height: 100px;
+            width: 100px;
+        }
+    </style>
+    <h1>Данные из API</h1>
+    <!-- Контейнер для изображений -->
+    <div class="img-container" id="data-list"></div>
+
+    <script>
+        const ACCESS_KEY = "dOZhSJ0HqEwGuGZAQSuFpuE8lo9aHb1Sh-N6SOiQUdc"; // Ваш API ключ
+        const API_URL = `https://api.unsplash.com/photos/?client_id=${ACCESS_KEY}`;
+        const dataList = document.getElementById("data-list"); // Элемент списка
+
+        // Функция для добавления изображений на страницу
+        function addPictures(container) {
+            fetch(API_URL) // Запрос к API для получения данных
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Ошибка при получении данных: ${response.status}`);
+                    }
+                    return response.json(); // Преобразование ответа в формат JSON
+                })
+                .then(data => {
+                    data.forEach(pic => { // Перебираем полученные данные
+                        const imgEl = document.createElement('img'); // Создаем элемент img
+                        imgEl.src = pic.urls.regular; // Устанавливаем источник изображения
+                        imgEl.classList.add('data-list'); // Добавляем класс для стилизации
+                        container.appendChild(imgEl); // Добавляем изображение в контейнер
+                    });
+                })
+                .catch(error => console.log(error)); // Обработка ошибок
+        }
+
+        // Вызов функции добавления изображений при загрузке страницы
+        addPictures(dataList);
+
+        // Обработчик события прокрутки страницы для бесконечной загрузки изображений
+        window.addEventListener('scroll', () => {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+                addPictures(dataList); // Вызываем функцию добавления изображений
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Fetch Example</title>
+    <style>
+        #data-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            width: 150px;
+            height: 200px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        img {
+            max-width: 100%;
+            max-height: 150px;
+            margin-bottom: 10px;
+        }
+
+        #loading {
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Данные из API</h1>
+    <ul id="data-list"></ul>
+    <div id="loading">Загрузка...</div>
+
+    <script>
+        const ACCESS_KEY = "dOZhSJ0HqEwGuGZAQSuFpuE8lo9aHb1Sh-N6SOiQUdc"; // Ваш API ключ
+        const API_URL = `https://api.unsplash.com/photos/?client_id=${ACCESS_KEY}`;
+
+        const dataList = document.getElementById("data-list");
+        const loading = document.getElementById("loading");
+
+        let page = 1; // Начальная страница
+
+        function renderData(data) {
+            data.forEach(item => {
+                const listItem = document.createElement("li");
+                const img = document.createElement("img");
+                img.src = item.urls.small;
+                img.alt = item.alt_description;
+                listItem.appendChild(img);
+                const authorInfo = document.createElement("p");
+                authorInfo.textContent = `Автор: ${item.user.name}`;
+                listItem.appendChild(authorInfo);
+                dataList.appendChild(listItem);
+            });
+        }
+
+        function fetchData() {
+            loading.style.display = "block"; // Показываем индикатор загрузки
+            fetch(`${API_URL}&page=${page}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Ошибка при получении данных: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    renderData(data);
+                    loading.style.display = "none"; // Скрываем индикатор загрузки
+                    page++; // Увеличиваем номер страницы для следующего запроса
+                })
+                .catch(error => {
+                    loading.style.display = "none"; // Скрываем индикатор загрузки в случае ошибки
+                    dataList.innerHTML = `<li>${error.message}</li>`;
+                });
+        }
+
+        // Функция для определения достижения конца страницы
+        function handleScroll() {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+                fetchData(); // Вызываем загрузку данных при достижении конца страницы
+            }
+        }
+
+        fetchData(); // Вызываем функцию для загрузки данных при загрузке страницы
+        window.addEventListener("scroll", handleScroll); // Добавляем обработчик события прокрутки страницы
+    </script>
+</body>
+</html>

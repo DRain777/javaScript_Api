@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API Fetch Example</title>
+  </head>
+  <body>
+    <style>
+      img {
+        height: 100px;
+        width: 100px;
+      }
+    </style>
+    <h1>Данные из API</h1>
+    <ul id="data-list"></ul>
+
+    <script>
+      const ACCESS_KEY = "dOZhSJ0HqEwGuGZAQSuFpuE8lo9aHb1Sh-N6SOiQUdc"; // Ваш API ключ
+
+      // Ссылка на API для запроса данных
+      const API_URL = `https://api.unsplash.com/photos/?client_id=${ACCESS_KEY}`;
+
+      // Находим элемент списка, в который будем добавлять данные
+      const dataList = document.getElementById("data-list");
+
+      // Функция для добавления данных на страницу
+      function renderData(data) {
+        // Очищаем список перед добавлением новых данных
+        dataList.innerHTML = "";
+
+        // Проходимся по каждому элементу массива данных и добавляем его в список
+        data.forEach((item) => {
+          const listItem = document.createElement("li");
+
+          // Создаем тег <img> для отображения фотографии
+          const img = document.createElement("img");
+          img.src = item.urls.small;
+          img.alt = item.alt_description;
+          listItem.appendChild(img);
+
+          // Добавляем информацию об авторе
+          const authorInfo = document.createElement("p");
+          authorInfo.textContent = `Автор: ${item.user.name}`;
+          listItem.appendChild(authorInfo);
+
+          dataList.appendChild(listItem);
+        });
+      }
+
+      // Запрос данных из API
+      fetch(API_URL)
+        .then((response) => {
+          // Проверяем успешность ответа
+          if (!response.ok) {
+            throw new Error(`Ошибка при получении данных: ${response.status}`);
+          }
+          // Преобразуем ответ в JSON
+          return response.json();
+        })
+        .then((data) => {
+          // Вызываем функцию для добавления данных на страницу
+          renderData(data);
+        })
+        .catch((error) => {
+          // В случае ошибки выводим сообщение об ошибке на страницу
+          dataList.innerHTML = `<li>${error.message}</li>`;
+        });
+
+      function handleScroll() {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+        fetchData(); // Вызываем загрузку новых данных при достижении конца страницы
+    }
+}
+
+    </script>
+  </body>
+</html>

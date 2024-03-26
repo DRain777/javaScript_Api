@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>task_1</title>
+  </head>
+
+  <body>
+    <h1>Выбирите категорию товаров</h1>
+
+    <select id="sort-select">
+      <option value="elec">Электроника</option>
+      <option value="bit">Бытовая техника</option>
+    </select>
+
+    <h1>Товары</h1>
+
+    <ul id="product-list">
+      <li class="product-item">Товар 1 </li>
+      <li class="product-item">Товар 2 </li>
+      <li class="product-item">Товар 3 </li>
+    </ul>
+
+    <script>
+      const arrayElecronik = ["Ноутбук", "Смартфон", " Фотокамера"];
+      const arrayBit = ["Пылесос ", " Стиральная машинка", "Утюг"];
+
+      // Получаем ссылки на элементы страницы
+      const sortSelect = document.querySelector("#sort-select");
+      const productList = document.querySelector("#product-list");
+
+      // Обработчик события изменения выбора в селекте
+      sortSelect.addEventListener("change", () => {
+        const selectedOption = sortSelect.value; // Получаем выбранную категорию
+        renderProducts(selectedOption); // Отображаем товары в зависимости от выбранной категории
+      });
+
+      // Функция для отображения товаров в зависимости от выбранной категории
+      function renderProducts(category) {
+        // Очищаем список товаров перед добавлением новых
+        productList.innerHTML = "";
+
+        // Получаем соответствующий массив товаров в зависимости от выбранной категории
+        const products = category === "elec" ? arrayElecronik : arrayBit;
+
+        // Создаем элементы списка товаров и добавляем их на страницу
+        products.forEach((product) => {
+          const listItem = document.createElement("li");
+          listItem.textContent = product;
+          productList.appendChild(listItem);
+        });
+      }
+    </script>
+  </body>
+</html>
